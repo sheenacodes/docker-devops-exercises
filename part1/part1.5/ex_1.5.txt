@@ -1,0 +1,15 @@
+
+run container:
+
+docker run -it --name curltest ubuntu:latest sh -c 'echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;'
+
+on another terminal enter running container:
+
+docker exec -it curltest bash
+apt-get update
+apt-get install curl
+
+on first tab:
+enter helsinki.fi
+
+
