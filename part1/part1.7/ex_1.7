@@ -1,0 +1,22 @@
+
+save start.sh with contents
+echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;
+
+create Dockerfile
+Dockerfile:
+
+FROM ubuntu:16.04
+
+RUN apt-get update && apt-get -y install curl
+COPY ./start.sh .
+RUN chmod +x ./start.sh
+
+CMD ./start.sh
+
+--------
+
+run commands
+
+docker build -t curler .
+docker run -it curler
+
