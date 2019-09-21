@@ -7,7 +7,7 @@ RUN apt install -y nodejs
 COPY ./package.json .
 RUN npm install
 EXPOSE 5000
-ENV API_URL=http://localhost:8000
+ENV FRONT_URL=http://localhost:5000
 ENTRYPOINT npm start
 
 
