@@ -1,9 +1,9 @@
 save Dockerfile_frontend as Dockerfile in frontend project root
 run commands
 docker build -t frontend .
-docker build -d -p 5000:5000 -v $(pwd):/home -v /home/node_modules frontend
+docker run -d -p 5000:5000 -v $(pwd):/home -v /home/node_modules frontend
 
 go to backend project root folder
 save Dockerfile_backend as Dockerfile
 docker build -t backend .
-docker build -d -p 8000:8000 -v $(pwd):/home -v /home/node_modules backend
+docker run -d -p 8000:8000 -v $(pwd):/home -v /home/node_modules backend

@@ -1,0 +1,23 @@
+version: '3.5' 
+
+services: 
+
+    back_docker:
+      build:  ./backend-example-docker      
+      volumes:
+        - ./backend-example-docker:/home
+        - /home/node_modules
+      ports:
+        - 8000:8000
+      container_name: backend
+   
+    front_docker: 
+      build:  ./frontend-example-docker
+      volumes:
+        - ./frontend-example-docker:/home
+        - /home/node_modules
+      ports:
+        - 5000:5000
+      container_name: frontend
+
+
