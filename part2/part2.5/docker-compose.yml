@@ -1,0 +1,32 @@
+version: '3.5' 
+
+services: 
+
+    database:
+      image: redis
+      restart: unless-stopped
+      container_name: redis_db
+   
+    back_docker:
+      build:  ./backend-example-docker      
+      volumes:
+        - ./backend-example-docker:/home
+        - /home/node_modules
+      ports:
+        - 8000:8000
+      environment:
+      - REDIS=database
+      - REDIS_PORT=6379
+      container_name: backend
+   
+    front_docker: 
+      build:  ./frontend-example-docker
+      volumes:
+        - ./frontend-example-docker:/home
+        - /home/node_modules
+      ports:
+        - 5000:5000
+      container_name: frontend
+
+
+
