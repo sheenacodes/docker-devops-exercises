@@ -1,0 +1,43 @@
+version: '3.5' 
+
+services: 
+
+    redisb:
+      image: redis
+      restart: unless-stopped
+      container_name: redis_db
+   
+    postgresb:
+      image: postgres
+      restart: unless-stopped
+      environment:
+       - POSTGRES_USER=abcde
+       - POSTGRES_PASSWORD=12345
+      container_name: postgres_db
+      
+    back_docker:
+      build:  ./backend-example-docker      
+      volumes:
+        - ./backend-example-docker:/home
+        - /home/node_modules
+      ports:
+        - 8000:8000
+      environment:
+      - REDIS=redisb
+      - REDIS_PORT=6379
+      - DB_HOST=postgresb
+      - DB_USERNAME=abcde
+      - DB_PASSWORD=12345
+      container_name: backend
+   
+    front_docker: 
+      build:  ./frontend-example-docker
+      volumes:
+        - ./frontend-example-docker:/home
+        - /home/node_modules
+      ports:
+        - 5000:5000
+      container_name: frontend
+
+
+
