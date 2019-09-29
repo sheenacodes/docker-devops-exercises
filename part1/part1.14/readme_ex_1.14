@@ -1,0 +1,14 @@
+Dockerfile_dev can be used as Dockerfile in dev environment without making any changes
+
+However to run in production, changes were made
+
+added new file config/secret.yml with content:
+production:
+  secret_key_base: <%= ENV["SECRET_KEY_BASE"] %>
+
+Following line was uncommented in Gemfile
+gem 'redis', '~> 4.0'
+
+With these changes Dockerfile_prod works in production
+
+

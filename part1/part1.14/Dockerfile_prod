@@ -1,0 +1,18 @@
+FROM ruby:2.6.0
+
+WORKDIR /home
+COPY . .
+RUN chmod 777 /tmp
+RUN bundle install
+RUN apt-get update && apt-get install -y curl
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash
+RUN apt-get install -y nodejs
+ENV RAILS_ENV=production
+ENV SECRET_KEY_BASE=secret
+ENV RAILS_LOG_TO_STDOUT=true
+RUN rails db:migrate
+RUN rake assets:precompile
+EXPOSE 3000
+ENTRYPOINT rails s -e production
+
+
