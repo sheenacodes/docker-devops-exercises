@@ -1,0 +1,4 @@
+for faster result
+run with:
+
+docker-compose up --scale compute=5
